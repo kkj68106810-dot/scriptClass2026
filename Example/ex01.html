@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button onclick="problem1()" > 문제1: 변수와 상수 출력</button>
+    <p id="p1"></p>
+    <hr />
+
+    <button onclick="problem2()" > 문제2: 두 수 더하기</button>
+    <p id="p2"></p>
+
+    <hr />
+    <input id="numInput" type="number" placeholder="숫자입력" />
+    <button onclick="showVariable()">값 확인</button>
+    <p id="output1"></p>
+
+    <script>
+        let print01 = document.getElementById('p1');
+        let print02 = document.getElementById('p2');
+        let output = document.getElementById('numInput');
+
+        function problem1() {
+            let name = '홍길동씨';
+            let age = 20;
+            // document.getElementById('p1').innerText = '이름 : ' + name + ', 나이 : ' + age;
+            print01.innerText = `이름 : ${name}  , 나이 : ${age}`;
+        }
+        function problem2 () {
+            let a = 10;
+            let b = 15;
+            print02.innerText = a+b;
+        }
+
+        function showVariable() {
+            document.getElementById('output1').innerText = output.value;
+        }
+
+    </script>
+</body>
+</html>
