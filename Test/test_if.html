@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 IF</title>
+</head>
+<body>
+    <input type="text" id="userid" placeholder="아이디" >
+    <input type="password" id="password" placeholder="암호">
+
+    <button onclick="loginCheck()">로그인</button>
+
+    <script>
+        let userid = document.getElementById('userid')
+        let password = document.getElementById('password')
+        // let num = 5;
+        // if(num % 2 === 0) {
+        //     console.log('짝수')
+        // } else {
+        //     console.log('홀수')
+        // }
+
+        function loginCheck() {
+            if(userid.value === 'admin' && password.value === '1234'){
+                console.log('로그인 성공');
+                alert('성공입니다.ㅎㅎㅎㅎ');
+            } else {
+                alert('실패햇습니다.');
+            }
+        }
+
+    </script>
+</body>
+</html>

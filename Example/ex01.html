@@ -17,10 +17,35 @@
     <button onclick="showVariable()">값 확인</button>
     <p id="output1"></p>
 
+    <hr />
+    <!--    -->
+    <input id="num1" type="number" placeholder="숫자1" >
+    <input id="num2" type="number" placeholder="숫자2" >
+    <button onclick="compareNum()">비교</button>
+    <p id="output5"></p>
+
+    <hr />
+    <input id="score" type="number" placeholder="점수 입력" >
+    <button onclick="checkGrade()">등급확인</button>
+    <p id="output8"></p>
+
     <script>
         let print01 = document.getElementById('p1');
         let print02 = document.getElementById('p2');
         let output = document.getElementById('numInput');
+        let num1 = document.getElementById('num1');
+        let num2 = document.getElementById('num2');
+        let score = document.getElementById('score');
+
+        const human = {
+            name: 'Human',
+            address: '너네집',
+            age: 20
+        }
+
+        human.address = '서울시'
+
+        console.log(human)
 
         function problem1() {
             let name = '홍길동씨';
@@ -37,6 +62,26 @@
         function showVariable() {
             document.getElementById('output1').innerText = output.value;
         }
+
+        function compareNum() {
+            console.log(num1.value)
+            console.log(num2.value)
+            // let num1 = document.getElementById('num1').value;
+            // let num2 = document.getElementById('num2').value;
+            document.getElementById('output5').innerText = num1.value >= num2.value ? 'false' : 'true';
+        }
+
+        function checkGrade() {
+            let grade = Number(score.value);
+            document.getElementById('output8').innerText
+                = (grade >= 90) ? 'A' :
+                (grade >= 80) ? 'B' :
+                (grade >= 70) ? 'C' :
+                (grade >= 60) ? 'D' :
+                (grade >= 50) ? 'E' : 'F';
+        }
+
+
 
     </script>
 </body>
