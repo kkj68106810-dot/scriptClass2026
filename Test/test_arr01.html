@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>배열(Array) 기초 설명</title>
+</head>
+<body>
+    <script>
+        let fruits = ['사과', '딸기', '포도'];
+        console.log(`fruit 출력 : ${fruits}`);
+
+
+        let numbers = [1, 2, 3, 4, 5];
+        console.log(`numbers의 2번값 : ${numbers[2]}`);
+        // 배열의 타입은 객체이다.
+        console.log(`데이터 타입 number : ${typeof numbers}`);
+        console.log(`데이터 타입 fruits : ${typeof fruits}`);
+
+        //3. 배열의 길이를 세는 property length
+        // property는 ()가 존재하지 않는다.
+        // method는 반드시 ()괄호가 존재한다.(예: pop())
+        let names=['Jason', 'Alice', 'Candy', 'Chris'];
+        console.log(`name의 길이 : ${names.length}`);
+        let total = 0;
+        for(let i=0; i<numbers.length; i++){
+            total += numbers[i]
+        }
+
+        console.log(`numbers배열의 합계 : ${total}`);
+
+        // 5. 혼합 배열 arr01 선언
+        let arr01 = [10, 'Switch', '2026-09-28'];
+        console.log(`arr01의 요소출력 : ${arr01}`)
+
+        // 6. 배열 선언 두번째 방식
+        let arr03= Array(50, 60, 70);
+        console.log(`arr03 요소출력 : ${arr03}`)
+
+        // 7. 배열선언 3번째 방식
+        // 단 현재 arr04 참조변수는 빈 값이다.
+        // 아래와 같이 선언한 빈값의 경우 아무것도 출력하지 않는다.
+        let arr04 = new Array(3)
+        console.log(`arr04 요소 출력 : ${arr04}`)
+
+        // 8. 빈 배열을 출력하는 방식 fill()메소드를 이용하여 값을 지정하는 방식
+        // new Array(3).fill(0); => arr05의 3개요소를 모두 0으로 채운다.
+        let arr05 = new Array(3).fill(0);
+        console.log(`arr05 요소 출력 : ${arr05}`);
+
+        // 위의 arr05배열의 각 요소값을 1, 2, 3 으로 변경하여 출력하기
+        for(let i=1; i<arr05.length+1; i++){
+            arr05[i-1] = i;
+        }
+        console.log(`arr05 요소 출력2 : ${arr05}`);
+
+    </script>
+</body>
+</html>

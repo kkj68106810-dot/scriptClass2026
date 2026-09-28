@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .p-color {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <!--힌트-->
+    <!--이름, 단가, 수량(초기값1) 배열을각각만들어라-->
+    <!--수량이0이면'품절', 아니면소계(단가x수량)를출력하라-->
+    <!--설명:-->
+    <!--상품3개의이름, 단가, 수량(초기값1) 배열을만들고, +, -버튼으로수량-->
+    <!--을조절해소계와전체합계를실시간으로출력하세요.-->
+    <!--조건:-->
+    <!--수량은0 미만으로내려가지않으며, 0이면'품절'을표시할것-->
+    <!--상품별소계(단가x 수량)를실시간으로표시할것-->
+    <!--전체합계를화면하단에항상실시간으로표시할것-->
+
+    <h4>장바구니</h4>
+    <div id="result"></div>
+
+
+
+    <script>
+        let products = ['티셔츠','양말', '모자'];
+        let prdPrice = [15000, 3000, 12000];
+        let prdCount = [2, 0, 3];
+        let resultHtml = '';
+
+        function render() {
+            let totalPrice = 0;
+            products.map((product, idx) => {
+                let price = prdPrice[idx]*prdCount[idx];
+                    resultHtml += `<p>${products[idx]} (${prdPrice[idx]}원) x ${prdCount[idx]} ${price}`;
+                    resultHtml += `<button class="btn" onclick="minusClick${idx}()">-</button>
+                            <button class="btn" onclick="plusClick${idx}()">+</button>
+                            </p>`;
+                    totalPrice += price;
+                }
+            )
+            resultHtml += `<p class="p-color">총 합계 : ${totalPrice} 원</p>`;
+            document.getElementById('result').innerHTML = resultHtml;
+        }
+
+        render();
+
+        function minusClick0() {
+            if(prdCount[0] !== 0) {
+                --prdCount[0]
+                resultHtml = '';
+                render();
+            }
+        }
+        function minusClick1() {
+            if(prdCount[1] !== 0) {
+                --prdCount[1]
+                resultHtml = '';
+                render();
+            }
+        }
+        function minusClick2() {
+            if(prdCount[2] !== 0) {
+                --prdCount[2]
+                resultHtml = '';
+                render();
+            }
+
+        }
+
+        function plusClick0() {
+            ++prdCount[0];
+            resultHtml = '';
+            render();
+        }
+        function plusClick1() {
+            ++prdCount[1];
+            resultHtml = '';
+            render();
+        }
+        function plusClick2() {
+            ++prdCount[2];
+            resultHtml = '';
+            render();
+        }
+
+    </script>
+
+</body>
+</html>

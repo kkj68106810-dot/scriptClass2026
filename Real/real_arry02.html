@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .color {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!--힌트-->
+    <!--책이름과 재고수량을 저장하는 배열을 따로 만들어라-->
+    <!--색 지정은 <span class=‘color’>태그 이용하라-->
+    <!--설명: -->
+    <!--책 제목과 재고 수량을 배열로 저장하고, 재고가 5권 이하인 책-->
+    <!--만 “재고 부족”으로 표시하세요.-->
+    <!--조건:-->
+    <!--HTML에서 버튼 클릭 시 결과가 출력되도록-->
+    <!--CSS로 재고 부족 책은 빨간색 글씨-->
+    <h4>책 재고 현황</h4>
+    <button onclick="booksPrint()">재고 확인</button>
+    <div id="result"></div>
+
+
+    <script>
+        let books = ['자바스크립트 입문','HTML&CSS','파이썬 기초','데이터 분석'];
+        let count = [10, 3, 7, 2];
+        let resultHtml = '';
+
+        function booksPrint() {
+            books.forEach((book, idx) => {
+                console.log(book, idx);
+                if(count[idx] > 5 ) {
+                    resultHtml += `<p>${books[idx]}:${count[idx]}-<span style="color:green">재고 충분</span></p>`;
+                } else {
+                    resultHtml += `<p>${books[idx]}:${count[idx]}-<span class="color">불합격</span></p>`;
+                }
+            })
+            document.getElementById('result').innerHTML = resultHtml;
+        }
+
+
+
+    </script>
+
+</body>
+</html>

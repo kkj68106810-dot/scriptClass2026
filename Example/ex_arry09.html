@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>심화문제</title>
+</head>
+<body>
+    <!--① 배열에서 짝수와 홀수 구분-->
+    <!--② 숫자 배열이 주어졌을 때, 짝수와 홀수를 구분하여 출력하세요.-->
+    <!--③ 배열: let numbers = [12, 7, 5, 20, 33, 18]-->
+    <!--④ 출력 예시: "짝수: 12, 20, 18 / 홀수: 7, 5, 33“-->
+    <h3>배열 + for문 + if문 문제</h3>
+    <div><label for="score"><p>1번 점수 배열 입력 : </p></label>
+        <input type="text" id="score"><button onclick="changeValue()" style="height: 30px;">결과 확인</button></div>
+    <p id="p1"></p>
+    <script>
+        let getScores = document.getElementById("score");
+        let inputValue = "";
+        let arr01 = [];
+        let printStg1 = "짝수:";
+        let printStg2 = "홀수:";
+        function changeValue() {
+            inputValue = getScores.value;
+            arr01 = inputValue.split(",")
+            arr01.forEach(element => {
+                element = Number (element);
+                console.log(element);
+                if(element%2 === 0) {
+                    printStg1 += element + ","
+                } else {
+                    printStg2 += element + ","
+                }
+            })
+            let arrStr = printStg1.slice(0, -1) + " / " + printStg2.slice(0, -1);
+
+            // document.getElementById("p1").innerText = printStg.substring(0, printStg.length-2);
+            document.getElementById("p1").innerText = arrStr;
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>심화문제</title>
+</head>
+<body>
+    <!--① 학생 점수 평가-->
+    <!--② 학생들의 점수가 배열로 주어졌습니다.-->
+    <!--③ 배열: let scores = [95, 67, 80, 55, 100, 72]-->
+    <!--④ 조건: 90점 이상 → "A", 80점 이상 → "B", 70점 이상 → "C", 나머지 → "F"-->
+    <!--⑤ 출력 예시: "95점: A, 67점: F, ..."-->
+    <h3>배열 + for문 + if문 문제</h3>
+    <div><label for="score"><p>1번 점수 배열 입력 : </p></label>
+        <input type="text" id="score"><button onclick="changeValue()" style="height: 30px;">결과 확인</button></div>
+    <p id="p1"></p>
+    <script>
+        let getScores = document.getElementById("score");
+        let inputValue = "";
+        let arr01 = [];
+        let printStg = "";
+        function changeValue() {
+            inputValue = getScores.value;
+            arr01 = inputValue.split(",")
+            arr01.forEach(element => {
+                element = Number (element);
+                console.log(element);
+                if(element >= 90) {
+                    printStg += element + "점 : A, "
+                } else if (element >= 80) {
+                    printStg += element + "점 : B, "
+                } else if(element >= 70) {
+                    printStg += element + "점 : C, "
+                } else {
+                    printStg += element + "점 : D, "
+                }
+            })
+            console.log(printStg);
+            console.log(printStg.length)
+            let result = printStg.slice(0, printStg.length-2);
+            // document.getElementById("p1").innerText = printStg.substring(0, printStg.length-2);
+            document.getElementById("p1").innerText = result;
+        }
+
+    </script>
+</body>
+</html>

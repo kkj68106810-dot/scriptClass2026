@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .color {
+            color: green;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!--힌트-->
+    <!--투표자 이름과 득표수를 저장하는 배열을 따로 만들어라-->
+    <!--색 지정은 <span class=‘color’>태그 이용하라-->
+    <!--설명:-->
+    <!--후보자 이름 배열과 투표 수 배열을 만들어 투표 결과를 출력하고, 가-->
+    <!--장 많이 얻은 후보자를 표시하세요.-->
+    <!--조건:-->
+    <!--CSS로 1등 후보자 강조-->
+
+    <h4>투표결과</h4>
+    <button onclick="votePrint()">투표 집계</button>
+    <div id="result"></div>
+
+    <script>
+        let persons = ['철수','영희','민수'];
+        let countVote = [120, 150, 90];
+        let resultHtml = '';
+        let highScoreIdx = 0;
+        function votePrint() {
+            let tempInt = 0;
+            countVote.forEach(item => {
+                if(item > tempInt) {
+                    tempInt = item
+                }
+            })
+            highScoreIdx = countVote.indexOf(tempInt);
+
+            persons.forEach((item, idx) => {
+                console.log(highScoreIdx, item, idx);
+                if(highScoreIdx === idx) {
+                    resultHtml += `<p>${persons[idx]}:${countVote[idx]} <span class="color">1등</span></p>`;
+                } else {
+                    resultHtml += `<p>${persons[idx]}:${countVote[idx]}`;
+                }
+            })
+
+            document.getElementById('result').innerHTML = resultHtml;
+        }
+
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .p-color {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<!--    힌트-->
+<!--    상품이름과재고수량배열을각각만들어라-->
+<!--    버튼클릭시배열값만바꾸고render()로화면을다시그려라-->
+<!--    설명:-->
+<!--    상품3개의이름과재고수량을배열에저장하고, 각상품마다+, -버-->
+<!--    튼으로재고를조절해실시간으로화면에반영하세요.-->
+<!--    조건:-->
+<!--    재고는0 미만으로내려가지않도록할것-->
+<!--    버튼클릭시해당상품의재고만즉시갱신될것-->
+<!--    전체재고합계를화면하단에항상실시간으로표시할것-->
+
+    <h4>실시간 재고 관리</h4>
+<!--    <p>노트북 : 3개 <button style="width: 30px; height: 20px" >-</button> <button style="width: 30px; height: 20px" >+</button></p>-->
+    <div id="result"></div>
+
+
+
+    <script>
+        let products = ['노트북','마우스', '키보드'];
+        let count = [3, 3, 2];
+        let resultHtml = '';
+
+
+
+        function render() {
+            let totalCount = 0;
+            products.map((product, idx) => {
+                    resultHtml += `<p>${products[idx]}:${count[idx]}개`;
+                    resultHtml += `<button class="btn" onclick="minusClick${idx}()">-</button>
+                            <button class="btn" onclick="plusClick${idx}()">+</button>
+                            </p>`;
+                    totalCount += count[idx];
+                }
+            )
+            resultHtml += `<p class="p-color">총 재고 : ${totalCount} 개</p>`;
+            document.getElementById('result').innerHTML = resultHtml;
+        }
+
+        render();
+
+        function minusClick0() {
+            if(count[0] !== 0) {
+                --count[0]
+                resultHtml = '';
+                render();
+            }
+        }
+        function minusClick1() {
+            if(count[1] !== 0) {
+                --count[1]
+                resultHtml = '';
+                render();
+            }
+        }
+        function minusClick2() {
+            if(count[2] !== 0) {
+                --count[2]
+                resultHtml = '';
+                render();
+            }
+
+        }
+
+        function plusClick0() {
+            ++count[0];
+            resultHtml = '';
+            render();
+        }
+        function plusClick1() {
+            ++count[1];
+            resultHtml = '';
+            render();
+        }
+        function plusClick2() {
+            ++count[2];
+            resultHtml = '';
+            render();
+        }
+
+    </script>
+
+</body>
+</html>

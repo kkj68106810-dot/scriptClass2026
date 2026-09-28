@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--    힌트-->
+<!--    학생이름과 평균점수를 저장하는 배열을 따로 만들어라-->
+<!--    서로 다른 색 지정은 <span class=‘color’>태그 이용하라-->
+<!--    설명: -->
+<!--    학생 5명의 이름과 점수를 배열에 저장하고, 평균 점수와 합격 여부를 출-->
+<!--    력하세요.-->
+<!--    조건:-->
+<!--    점수가 60점 이상이면 합격, 미만이면 불합격-->
+<!--    HTML에서 버튼 클릭 시 결과가 출력되도록-->
+    <h4>학생 성적표</h4>
+    <button onclick="scorePrint()">성적표 출력</button>
+    <div id="result"></div>
+
+    <script>
+        let studentNames = ['철수', '영희', '민수', '수지', '준호'];
+        let scores = [85, 58, 92, 77, 61];
+        let resultHtml ="";
+        function scorePrint() {
+            studentNames.forEach((student, idx) => {
+                console.log(student, idx);
+                if(scores[idx] >= 60 ) {
+                   resultHtml += `<p>${studentNames[idx]}:${scores[idx]}-<span style="color:green">합격</span></p>`;
+                } else {
+                    resultHtml += `<p>${studentNames[idx]}:${scores[idx]}-<span style="color:red">불합격</span></p>`;
+                }
+            })
+
+            document.getElementById("result").innerHTML = resultHtml;
+        }
+    </script>
+
+</body>
+</html>
