@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>실무 2차원 배열 문제</title>
+    <style>
+        .student-container {
+            display: flex;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>1. 성적표 (총점과 평균 계산)</h3>
+        <div id="render"></div>
+    </div>
+
+    <script>
+        // 성적표 만들기
+        // 설명: 학생 3명의 국, 영, 수 점수를 2차원 배열에 저장하고, 각 학생의 총점과 평균 계산하기.
+        //     요구사항: 총점과 평균은 배열을 순회하여 계산. ForEach()문 이용
+        // let scores = [
+        //     [85, 90, 80],
+        //     [70, 60, 75],
+        //     [95, 100, 90],
+        // ];
+        // toFixed(2) => 평균을 소수2자리까지 표시 하는 메서드
+
+        let scores = [
+            [85, 90, 80],
+            [70, 60, 75],
+            [95, 100, 90],
+        ];
+
+        let result = '<div>';
+
+        scores.forEach((element, idx) => {
+            let totalNum = 0;
+            result += `<div class="student-container">학생 ${idx+1} :&nbsp&nbsp`
+            element.map((element2, idx2) => {
+                result += `<div>${element2}&nbsp&nbsp</div>`;
+                totalNum += element2
+            })
+            result += `| 총점 : ${totalNum} 평균 : ${(totalNum/element.length).toFixed(2)} </div>`;
+        })
+        result += '</div>';
+
+        // seatArr.forEach((element) => {
+        //     result += '<tbody><tr>'
+        //     element.forEach((element2) => {
+        //         result += '<td>' + element2 + '</td>'
+        //     })
+        //     result += '</tr></tbody>'
+        // })
+        // result += '</table>';
+        document.getElementById('render').innerHTML = result;
+
+    </script>
+<table>
+    <tbody>
+    <tr>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

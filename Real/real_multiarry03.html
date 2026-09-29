@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>실무 2차원 배열 문제</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid gray;
+            width: 300px;
+            height: 300px;
+            text-align: center;
+        }
+        tbody, th, td {
+            border: 1px solid gray;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>3. 달력아 안녕 (6 x 7)</h3>
+        <div id="render"></div>
+    </div>
+
+    <script>
+        // 달력 만들기
+        // 설명: 6x7 2차원 배열을 이용해 1~31일까지 달력 형태로 채우기.
+        //     요구사항:
+        // let result = '<table border="1">';
+        // const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+        let arrs = Array.from(Array(6), () => new Array(7).fill(0));
+        let result = '<table>';
+        const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+
+        let calNum = 1;
+        arrs.forEach((element, idx) => {
+
+            result += '<tbody><tr>'
+            element.map((element2, idx2) => {
+                if(idx === 0){
+                    result += `<td>${weekdays[idx2]}</td>`
+                } else {
+                    if(!(calNum > 31)){
+                        result += `<td>${calNum}</td>`
+                        calNum++
+                    } else {
+                        result += `<td></td>`
+                    }
+                }
+
+            })
+            result += '</tr></tbody>'
+        })
+        result += '</table>';
+        document.getElementById('render').innerHTML = result;
+
+        // seatArr.forEach((element) => {
+        //     result += '<tbody><tr>'
+        //     element.forEach((element2) => {
+        //         result += '<td>' + element2 + '</td>'
+        //     })
+        //     result += '</tr></tbody>'
+        // })
+        // result += '</table>';
+
+    </script>
+</body>
+</html>

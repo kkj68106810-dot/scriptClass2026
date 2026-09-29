@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>실무 2차원 배열 문제</title>
+    <style>
+        .score-container {
+            display: flex;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>성적 분석 프로그램</h3>
+    <div id="render"></div>
+</div>
+
+<script>
+    // 성적 분석 프로그램 만들기
+    // 요구사항: 아래 주어진 배열 데이터를 이용하여 작성
+    // let names = ['홍길동', '개나리', '진달래'];
+    // let subjects = ['국어', '영어', '수학'];
+    // let scores = [
+    //     [85, 90, 78], // 홍길동
+    //     [92, 88, 95], // 개나리
+    //     [76, 85, 83], // 진달래
+    // ];
+    // 다음을 구하여 출력하시오.
+    // 1. 학생별 총점과 평균
+    // 2. 과목별 평균 (국어, 영어, 수학)
+    // 3. 최고 점수를 받은 학생의 이름과 점수
+
+
+    let names = ['홍길동', '개나리', '진달래'];
+    let subjects = ['국어', '영어', '수학'];
+    let scores = [
+        [85, 90, 78], // 홍길동
+        [92, 88, 95], // 개나리
+        [76, 85, 83], // 진달래
+    ];
+
+    let result = '<div>[학생별 총점과 평균]';
+
+    scores.forEach((score, idx) => {
+        let totalNum = 0;
+        result += `<div>${names[idx]} : `;
+        score.forEach((val, idx2) => {
+            totalNum += scores[idx][idx2]
+        })
+        result += `총점 : ${totalNum}`;
+        result += `평균 : ${(totalNum/score.length).toFixed(1)}</div>`;
+    })
+
+    result += '<br><br>';
+    result += '[과목별 평균]';
+    scores.forEach((score, idx) => {
+        let totalNum = 0;
+        result += `<div>${subjects[idx]} : `;
+        score.forEach((val, idx2) => {
+            totalNum += scores[idx2][idx]
+        })
+        result += `평균 : ${(totalNum/score.length).toFixed(1)}</div>`;
+    })
+
+    result += '<br><br>';
+    result += '[최고 점수 학생]';
+    let stdIdx = 0;
+    let maxScore = 0;
+    scores.forEach((score ) => {
+        score.forEach((val, idx2) => {
+            if(maxScore < val) {
+                maxScore = val;
+                stdIdx = idx2;
+            }
+        })
+    })
+    result += `<br>${names[stdIdx]} (${maxScore}점)</div>`;
+    // let stock = [
+    //     [10, 5, 8, 12], // 과일
+    //     [20, 15, 18, 25], // 음료
+    //     [30, 25, 28, 15]  // 간식
+    // ];
+
+    // let result = '<div>';
+    //
+    // stock.forEach((element, idx) => {
+    //     let totalNum = 0;
+    //     result += `<div class="student-container">카테고리 ${idx+1} :&nbsp&nbsp`
+    //     element.map((element2, idx2) => {
+    //         result += `<div>${element2}&nbsp&nbsp</div>`;
+    //         totalNum += element2
+    //     })
+    //     result += `| 총재고 : ${totalNum}</div>`;
+    // })
+    // result += '</div>';
+
+    // seatArr.forEach((element) => {
+    //     result += '<tbody><tr>'
+    //     element.forEach((element2) => {
+    //         result += '<td>' + element2 + '</td>'
+    //     })
+    //     result += '</tr></tbody>'
+    // })
+    // result += '</table>';
+    document.getElementById('render').innerHTML = result;
+
+</script>
+
+</body>
+</html>

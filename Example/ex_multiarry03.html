@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2차원 배열 문제</title>
+</head>
+<body>
+    <script>
+        let arrs = Array.from(Array(4), () => new Array(4).fill(0));
+
+        let shorted = arrs.map((val1) => {
+            return val1.map((val2, idx2) => {
+                return idx2 % 2 === 0 ? 1 : 0;
+            });
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2차원 배열 문제 4</title>
+</head>
+<body>
+    <script>
+        let arr07 =[
+            [3, 9, 2],
+            [8, 7, 6],
+            [1, 4, 5]
+        ]
+        let max = 0;
+
+        // let columnNum = 0;
+        arr07.map((value) => {
+            value.map((value2) => {
+                console.log(value2);
+                if(max <= value2) {
+                    max = value2;
+                }
+            })
+        })
+        console.log(max);
+    </script>
+</body>
+</html>

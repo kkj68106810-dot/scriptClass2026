@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2차원 배열 문제</title>
+</head>
+<body>
+    <script>
+        let arrs = Array.from(Array(2), () => new Array(4).fill(0));
+        let first = 1;
+
+        let shorted = arrs.map((val1) => {
+            return val1.map(() => {
+                let result = 0;
+                result = first;
+                first++;
+                return result;
+            });
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>실무 2차원 배열 문제</title>
+    <style>
+        button {
+            width: 20px;
+            height: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            border: 1px solid gray;
+            width: 300px;
+            height: 300px;
+            text-align: center;
+        }
+        tbody, th, td {
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>달력아 안녕</h3>
+    <div class="header"><button onclick="before()" ><</button><button onclick="next()">></button></div>
+    <div id="render"></div>
+</div>
+
+<script>
+    // 달력 만들기
+    let arrs = Array.from(Array(6), () => new Array(7).fill(0));
+    // let date = new Date();
+    // let date2 = new Date();
+    // console.log(date.getD())
+    // date2.setFullYear(date.getFullYear() - 1);
+    // console.log(date2.getFullYear().)
+
+
+    let result = '<table>';
+    const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+
+    let calNum = 1;
+    arrs.forEach((element, idx) => {
+
+        result += '<tbody><tr>'
+        element.map((element2, idx2) => {
+            if(idx === 0){
+                result += `<td>${weekdays[idx2]}</td>`
+            } else {
+                if(!(calNum > 31)){
+                    result += `<td>${calNum}</td>`
+                    calNum++
+                } else {
+                    result += `<td></td>`
+                }
+            }
+
+        })
+        result += '</tr></tbody>'
+    })
+    result += '</table>';
+    document.getElementById('render').innerHTML = result;
+
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2차원 배열 문제 4</title>
+</head>
+<body>
+    <script>
+        let arr06 = [
+            [1, 2, 3],
+            [4, 5, 6]
+        ];
+        let rowNum = 0;
+        let rowNum2 = 0;
+        // let columnNum = 0;
+        arr06.map((value, idx) => {
+            value.map((value2) => {
+                if(idx === 0) {
+                    rowNum += value2;
+                } else {
+                    rowNum2 += value2;
+                }
+            })
+        })
+
+        console.log(rowNum);
+        console.log(rowNum2);
+    </script>
+</body>
+</html>
