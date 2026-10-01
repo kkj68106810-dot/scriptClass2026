@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>장바구니</title>
+    <style>
+        table, tr, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .control {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+<h2>장바구니</h2>
+    <table id="cartTable">
+        <thead>
+        <tr>
+            <th>상품명</th>
+            <th>가격</th>
+            <th>수량</th>
+            <th>합계</th>
+            <th>조작</th>
+        </tr>
+        </thead>
+        <tbody id="cartBody"></tbody>
+    </table>
+    <div id="total">총 금액: 0원</div>
+
+    <script>
+        // ① Ex_Object05.html을 이용하여 장바구니의 수량을 조작하여 금액을 변경하도록 작성하시오.
+        // ② [+]버튼을 클릭하면 수량증가, 금액증가 한다.
+        // ③ [-]버튼을 클릭하면 수량감소, 금액감소 한다.
+        // ④ [x]버튼을 클릭하면 상품을 삭제한다.
+        // ⑤ 수량이 10개 이상 증가하면 ‘더 이상 증가 불가능’ alert를 출력하시오.
+        // ⑦ function renderCart() { }로 작성하시오.
+        // ⑥ 수량 감소 할 때 '수량은 최소 1개 이상이어야 합니다.＇라는 alert창 띄워 작성하시오.
+        // ⑧ 다음 페이지에 주어진 <html>, <script> 파일을 기준으로 작성하시오.
+        // ⑨ CSS는 <head> ~ </head>태그안에 알아서 작섷하시오.
+        // ⑩ 다음 페이지에 주어진 <출력 결과물>과 같이 출력되도록 작성하시오.
+        // ⑪ 저장할 파일명은 cart.html 로 작성하시오.
+        let getCartBody = document.getElementById('cartBody');
+        let getTotal = document.getElementById('total');
+        let cartList = [
+            { id: 1, name: '노트북', price: 1200000, quantity: 1 },
+            { id: 2, name: '마우스', price: 20000, quantity: 2 },
+            { id: 3, name: '키보드', price: 50000, quantity: 1 },
+        ];
+
+        renderCart();
+
+
+        function renderCart() {
+            let cartBodyHtml = '';
+            let totalPrice=0;
+            cartList.forEach((item, idx) => {
+                cartBodyHtml += `<tr>`
+                cartBodyHtml += `<td>${item.name}</td>`;
+                cartBodyHtml += `<td>${item.price}</td>`;
+                cartBodyHtml += `<td>${item.quantity}</td>`;
+                cartBodyHtml += `<td>${item.price*item.quantity}</td>`;
+                cartBodyHtml +=
+                    `<td class="control">
+                    <div class="plus"><button class="btn" onclick="clickPlus(${idx}, ${totalPrice})"> + </button></div><div class="minus" ><button class="btn" onclick="clickMinus(${idx}, ${totalPrice})"> - </button></div><div class="x"><button class="btn" onclick="clickDelete(${idx}, ${totalPrice})"> x </button></div>
+                 </td>`;
+                cartBodyHtml += `</tr>`;
+                totalPrice += item.price*item.quantity;
+            })
+            getTotal.innerHTML = `<p>총 금액: ${totalPrice}원</p`;
+            getCartBody.innerHTML = cartBodyHtml;
+        }
+
+
+        function clickPlus(index) {
+            if(cartList[index].quantity === 10) {
+                alert('더이상 추가하지 못합니다.')
+            } else {
+                cartList[index].quantity++;
+            }
+            renderCart();
+        }
+        function clickMinus(index) {
+            if(cartList[index].quantity > 1) {
+                cartList[index].quantity--;
+            } else {
+                alert('수량은 최소 1개 이상이어야 합니다.')
+                cartList[index].quantity = 1;
+            }
+            renderCart();
+        }
+        function clickDelete(index) {
+            cartList.splice(index, 1);
+            renderCart();
+        }
+
+
+    </script>
+
+</body>
+</html>

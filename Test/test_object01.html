@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Object</title>
+</head>
+<body>
+    <script>
+        // 객체(object) 가장 많이 사용하는 리터럴 방식으로 작성
+        // 객체이름 = {키:벨류, ....}
+        // 객체이름 = {property(속성): 데이터 ...}
+        let book = [{
+                title: "JavaScript",
+                author: "홍길동",
+                page: 500,
+                price: 15000
+            }]
+        ;
+        // 객체접근방법 : 객체이름.property
+        // ``(백틱)또는 +(문자나열)로 콘솔을 출력하는 경우
+        // 자바스크립트가 기본적으로 book.toString() 메소드가 자동으로 호출된다
+        // 고로, 문자열로 나열된 상태이다.
+        console.log(`book 객체 : ${book}`);
+        console.log(`book 객체 : ${book.title}`);
+        console.log('book 객체 :' +  book);
+        // book객체 : , book => 각각 독립된 상태로 콘솔출력됨
+        console.log('book 객체 :',  book);
+
+        function Book01(title, author, page, price) {
+            this.title = title;
+            this.author = author;
+            this.page = page;
+            this.price = price;
+        }
+        // 인스턴스화 한다.
+        let myBook = new Book01('HTML', '김길동', 40, 50000);
+        console.log('myBook : ', myBook);
+
+        // 객체의 property로 함수 가능하다.
+        let book02 = {
+            title: "CSS",
+            author: "진달랭",
+            page: 30,
+            price: 25000,
+            info: function() {
+                alert(`${this.title}책의 분량은 ${this.page}쪽이다.`);
+            }
+        }
+        console.log('book2 : ', book02)
+        let jsonBook2 = {
+            "title": "CSS가 좋다.",
+            "author": "ddd",
+            "page": 30,
+            "price": 25000,
+            "info": function() {
+                alert(`${this.title}책의 분량은 ${this.page}쪽이다.`);
+            }
+        }
+        jsonBook2.info()
+
+        interface
+
+    </script>
+</body>
+</html>

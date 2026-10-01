@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>키오스크입니다.</title>
+    <link rel="stylesheet" href="kioskCafe.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="left-container">
+            <div class="top-container">
+                <div class="title">원하시는 음료를 선택해 주세요</div>
+                <div class="subtitle">Please choose the drink you want.</div>
+                <div class="menu">MENU</div>
+            </div>
+            <div  class="middle-container">
+                <ul id="menu-list" class="menu-list">
+
+                </ul>
+            </div>
+        </div>
+        <div class="right-container">
+            <div class="title-container">주문내역</div>
+            <div id="cart-list" class="cart-list"></div>
+        </div>
+    </div>
+    <div class="footer-container">
+        <p id="total-price">
+
+        </p>
+    </div>
+
+    <script>
+        let menus = [
+            { id: 0, name: '아메리카노', type: 'HOT', price: 1000,quantity:1, images : "./images/1.png" },
+            { id: 1, name: '아메리카노', type: 'ICE', price: 1300,quantity:1, images : "./images/2.png" },
+            { id: 2, name: '바닐라라떼', type: 'HOT', price: 2500,quantity:1, images : "./images/3.png" },
+            { id: 3, name: '바닐라라떼', type: 'ICE', price: 2800,quantity:1, images : "./images/4.png" },
+            { id: 4, name: '연유라떼', type: 'HOT', price: 2500,quantity:1, images : "./images/5.png" },
+            { id: 5, name: '연유라떼', type: 'ICE', price: 2800,quantity:1, images : "./images/6.png" },
+            { id: 6, name: '카라멜마끼아또', type: 'HOT', price: 2800,quantity:1, images : "./images/7.png" },
+            { id: 7, name: '카라멜마끼아또', type: 'ICE', price: 3000,quantity:1, images : "./images/8.png" },
+            { id: 8, name: '카페모카', type: 'HOT', price: 3000,quantity:1, images : "./images/9.png" },
+            { id: 9, name: '카페모카', type: 'ICE', price: 3300,quantity:1, images : "./images/10.png" },
+            { id: 10, name: '딥카페라테', type: 'HOT', price: 3400,quantity:1, images : "./images/11.png" },
+            { id: 11, name: '딥카페라테', type: 'ICE', price: 3700,quantity:1, images : "./images/12.png" },
+        ]
+        let cartList = [];
+        let ulListHtml = `<div class="item-container">`;
+        menus.forEach(item => {
+            ulListHtml += `
+                <li class="menu-item" onclick="addCart(${item.id})">
+                    <div class="menu-image"><img src="${item.images}" alt="${item.name}"></div>
+                    <div class="menu-type">${item.type}</div>
+                    <div class="menu-name">${item.name}</div>
+                    <div class="menu-price">${item.price.toLocaleString()}</div>
+                </li>
+            `;
+        });
+        ulListHtml += `</div>`;
+        document.getElementById("menu-list").innerHTML = ulListHtml;
+
+        function addCart(idx) {
+            let isPush = true;
+            console.log(cartList);
+            if(cartList.length === 0){
+                cartList.push(menus[idx]);
+            } else {
+                cartList.forEach((item) => {
+                    if (item.id === idx) {
+                        if(item.quantity >= 10){
+                            alert('더이상 추가하지 못합니다.')
+                        } else {
+                            item.quantity++;
+                        }
+                        isPush = false;
+                    }
+                })
+                if(isPush){
+                    cartList.push(menus[idx]);
+                }
+            }
+            renderCart()
+
+        }
+
+
+        function renderCart() {
+            let totalPrice = 0;
+            let cartListHtml = `<div class="cart-container">`;
+            let totalHtml = `총 주문금액 : `
+
+            cartList.forEach((item, idx) => {
+                cartListHtml += `<div class="menu-wrap"><div class="menu-title">${item.name} ${item.quantity}개 ${item.type}, </div><div class="menu-price">${(item.price * item.quantity).toLocaleString()}원</div></div>`;
+                cartListHtml += `<div class="cal-container"><div class="plus"><button class="btn" onclick="clickPlus(${idx})"> + </button></div><div class="minus" ><button class="btn" onclick="clickMinus(${idx})"> - </button></div><div class="x"><button class="btn" onclick="clickDelete(${idx})"> x </button></div></div>`
+                totalPrice += item.price * item.quantity;
+            })
+            cartListHtml += `</div>`;
+            document.getElementById('cart-list').innerHTML = cartListHtml;
+            totalHtml += `${totalPrice} | <button class="pay-btn" onclick="payProcess()">현금 결제</button>`
+            document.getElementById('total-price').innerHTML = totalHtml;
+        }
+
+        function payProcess() {
+            cartList = [];
+            renderCart();
+        }
+
+        function clickPlus(index) {
+            if(cartList[index].quantity === 10) {
+                alert('더이상 추가하지 못합니다.')
+            } else {
+                cartList[index].quantity++;
+            }
+            renderCart();
+        }
+        function clickMinus(index) {
+            if(cartList[index].quantity > 1) {
+                cartList[index].quantity--;
+            } else {
+                alert('수량은 최소 1개 이상이어야 합니다.')
+                cartList[index].quantity = 1;
+            }
+            renderCart();
+        }
+        function clickDelete(index) {
+            console.log(cartList)
+            cartList[index].quantity = 1;
+            cartList.splice(index, 1);
+            renderCart();
+        }
+    </script>
+</body>
+</html>

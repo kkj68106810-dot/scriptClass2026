@@ -31,14 +31,12 @@
 
         }
         .cal-container {
-            /*box-shadow: 3px 3px 3px 3px lightgray;*/
             width: 500px;
             text-align: center;
             border-radius: 20px;
             border : 1px solid lightgray;
             padding : 15px 15px 50px 15px;
             background-color: white;
-
         }
         .header {
             display: flex;
@@ -50,7 +48,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-
         }
         .btn {
             background-color: lightgray;
@@ -83,8 +80,36 @@
     let presentMonth = date.getMonth();
     let presentDate = date.getDate();
 
-    display(presentYear, presentMonth);
+    function getClass(targetDate, idx, year, month) {
+        let dataType = typeof targetDate === 'string';
+        let returnString = '';
 
+        // 월화수요일이 변수로 들어오는지 판단
+        // 글자일 경우
+        if (dataType) {
+            if(idx===6) {
+                returnString += `<td class="blue">${targetDate}</td>`
+            } else if (idx===0) {
+                returnString += `<td class="red">${targetDate}</td>`
+            } else {
+                returnString += `<td>${targetDate}</td>`
+            }
+        // 숫자일 경우
+        } else {
+            if (idx === 0) {
+                returnString += `<td class="red">${targetDate <= 0 ? '' : targetDate}</td>`;
+            } else if (idx === 6) {
+                returnString += `<td class="blue">${targetDate <= 0 ? '' : targetDate}</td>`;
+            } else if (targetDate === presentDate && month === presentMonth && year === presentYear) {
+                returnString += `<td class="today">${targetDate <= 0 ? '' : targetDate}</td>`;
+            } else {
+                returnString += `<td>${targetDate <= 0 ? '' : targetDate}</td>`;
+            }
+        }
+        return returnString;
+    }
+
+    display(presentYear, presentMonth);
     // month는 1달전으로 취급함
     function display(year, month) {
         let getLastDate = lastDay(year, month);
@@ -99,43 +124,17 @@
         arrs.forEach((element, idx) => {
             element.forEach((element2, idx2) => {
                 if (idx === 0) {
-                    if(idx2===6) {
-                        result += `<td class="blue">${weekdays[idx2]}</td>`
-                    } else if (idx2===0) {
-                        result += `<td class="red">${weekdays[idx2]}</td>`
-                    } else {
-                        result += `<td>${weekdays[idx2]}</td>`
-                    }
+                    result += getClass(weekdays[idx2], idx2, year, month)
                 } else if (idx === 1) {
                     if (idx2 < getDay) {
                         result += `<td></td>`
                     } else if (idx2 >= getDay) {
-                        console.log(presentMonth, month)
-                        console.log(presentYear, year)
-                        console.log(typeof month)
-                        console.log(typeof year)
-                        if( idx2 === 6) {
-                            result += `<td class="blue">${calNum}</td>`;
-                        } else if (idx2 === 0) {
-                            result += `<td class="red">${calNum}</td>`;
-                        } else if(calNum === presentDate && month === presentMonth && year === presentYear) {
-                            result += `<td class="today">${calNum}</td>`;
-                        } else {
-                            result += `<td>${calNum}</td>`;
-                        }
+                        result += getClass(calNum, idx2, year, month);
                         calNum++;
                     }
                 } else if (idx >= 2) {
                     if (!(calNum > getLastDate)) {
-                        if( idx2 === 6) {
-                            result += `<td class="blue">${calNum}</td>`
-                        } else if (idx2 === 0) {
-                            result += `<td class="red">${calNum}</td>`
-                        } else if(calNum === presentDate && month === presentMonth && year === presentYear) {
-                            result += `<td class="today">${calNum}</td>`;
-                        } else {
-                            result += `<td>${calNum}</td>`
-                        }
+                        result += getClass(calNum, idx2, year, month);
                         calNum++;
                     } else {
                         if(arrs[idx][idx2] === 0) {
@@ -152,17 +151,8 @@
         document.getElementById('render').innerHTML = result;
     }
 
-
     function lastDay(year, month) {
-        let returnDay = 0;
-        let dayNum = [27, 28, 29, 30, 31, 32];
-        dayNum.forEach(day => {
-            let calDate = new Date(year, month, day).getDate();
-            if (calDate === 1) {
-                returnDay = day - 1;
-            }
-        })
-        return returnDay;
+        return new Date(year, month, 0).getDate();
     }
 
     function beforeMonth(year, month) {
@@ -184,7 +174,6 @@
             display(year, after);
         }
     }
-
 </script>
 </body>
 </html>
