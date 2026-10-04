@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>메가박스</title>
+    <link rel="stylesheet" href="movie.css">
+</head>
+<body>
+<div class="container">
+    <h2>빠른예매</h2>
+    <div class="reserve-container">
+        <div class="reserve-wrap">
+            <div class="reserve-movie">
+                <div class="reserve-title">
+                    <p>관람인원선택</p>
+                    <button class="btn" onclick="resetClick()">초기화</button>
+                </div>
+                <div class="reserve-info">
+                    <div id="info-render" class="info-title">
+
+                    </div>
+                    <div class="seat-container">
+                        <div class="screen">Screen</div>
+                        <div class="seat-table">
+                            <table>
+                                <tbody id="seat-render">
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="reserve-seat">
+                <div class="info-wrap">
+                    <div class="title-wrap">
+                        <div class="seat-title">타짜</div>
+                        <div class="seat-info">
+                            <div class="location">마곡</div>
+                            <div class="info-box">6관 [Laser]</div>
+                            <div>12:00 ~15:00</div>
+                        </div>
+                    </div>
+                    <div class="img">
+                        <img src="./images/target.jpg" alt="movie-poster">
+                    </div>
+                </div>
+                <div class="seat-list">
+                    <div class="reserve-info">
+                        <div class="seat-status">
+                            <div class="status seat-status1">
+
+                            </div>
+                            <div class="status seat-status2">
+
+                            </div>
+                            <div class="status seat-status3">
+
+                            </div>
+                            <div class="status seat-status3">
+
+                            </div>
+                            <div class="status seat-status3">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="selected">
+                        <div class="selected-title">선택</div>
+                        <div class="selected-list" id="selected-list">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div id="total-price" class="total-price">
+
+                </div>
+                <div class="reserve-btn">
+                    <button class="btn" onclick="beforeClick()">이전</button>
+                    <button class="btn" onclick="nextClick()">다음</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    let seats = Array.from(Array(10), () => new Array(10).fill(0));
+    let columnArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+    // let seatHtml = ``;
+    let infoHtml = ``;
+    let seatRender = document.getElementById('seat-render');
+    let infoRender = document.getElementById('info-render');
+    let totalRender = document.getElementById('total-price');
+    let selectedRender = document.getElementById('selected-list');
+    let totalHtml = ``;
+    let selectedHtml = ``;
+    let seatHtml = ``
+    // 15000, 8000, 6000
+    // 일반, 경로, 우대
+    let infoArr = [0, 0, 0];
+    let priceArr = [15000, 8000, 6000];
+    let selectedSeat = Array.from(Array(2), () => new Array(4).fill(''));
+    // let countClass = 0;
+    seatRenderFn()
+    infoRenderFn()
+    selectedRenderFn();
+
+    // 0 번 일반, 1번 경로, 2번 우대
+    function infoRenderFn() {
+        infoArr.forEach((item, idx) => {
+            let infoTitle = idx === 0 ? '일반' :
+                idx === 1 ? '경로' : '우대'
+            infoHtml += `<div class="info">${infoTitle}`
+            infoHtml += `<div class="minus"><button class="btn" onClick="minusClick(${idx})">-</button><input type="number" value="${item}" id="total-count" disabled></div>
+                  <div class="plus"><button class="btn" onclick="plusClick(${idx})">+</button></div>`
+            infoRender.innerHTML = infoHtml
+        })
+    }
+
+
+    function selectedRenderFn() {
+        selectedHtml = ``
+        selectedHtml += `<div class="selected-wrap">선택한 좌석</div><div class="selected-list-wrap">`;
+
+        selectedSeat.forEach((item1, idx1) => {
+            selectedHtml += `<div class="selected-wrap-seat">`;
+            item1.forEach((item2, idx2) => {
+                selectedHtml += `<div class="selected-seat-right">-</div>`;
+            })
+            selectedHtml += `</div>`;
+        })
+        selectedHtml += `</div>`;
+        selectedRender.innerHTML = selectedHtml
+    }
+
+    function seatRenderFn(totalCount, index1, index2) {
+        let countSelected = 0;
+        console.log('seatRender', totalCount, index1, index2)
+        if (totalCount === -1) {
+            alert("관람인원을 설정하세요.")
+            totalCount = -1;
+            return;
+        }
+        seatHtml = ``;
+        totalCount = (totalCount === undefined ? -1 : totalCount);
+
+
+        if (index1 !== undefined && index2 !== undefined) {
+
+                seats[index1][index2] = 1;
+
+
+        }
+        // 조건을 다 계산해야함
+        // let alertBoolean = false;
+        seats.forEach((item1, idx1) => {
+            let selectedStr = '';
+
+            seatHtml += `<tr>`
+            item1.forEach((item2, idx2) => {
+                // if (index1 !== undefined && index2 !== undefined) {
+                //     seats[index1][index2] = 1;
+                // }
+                // 값이 1일때 선택되었을때
+                if (item2 === 1) {
+                    if (countSelected === totalCount) {
+                        alert('관람인원수를 초과하였습니다.');
+                        seatHtml += `<td class="row able-row" onclick="seatRenderFn(${totalCount !== -1 ? totalCount : -1}, ${idx1}, ${idx2} )">${idx2 + 1}</td>`;
+
+
+                    } else {
+                        if (idx2 === 0) {
+                            seatHtml += `<td class="column">${columnArr[idx1][0]}</td>`
+                        } else if (totalCount === 1) {
+                            if (idx2 % 2 === 1) {
+                                seatHtml += `<td class="row disable-row">X</td>`
+                            } else {
+                                seatHtml += `<td class="row able-row selected-seat" onclick="seatRenderFn(${totalCount !== -1 ? totalCount : -1}, ${idx1}, ${idx2})">${idx2 + 1}</td>`;
+                                countSelected++;
+                            }
+                        } else {
+                            seatHtml += `<td class="row able-row selected-seat" onclick="seatRenderFn(${totalCount !== -1 ? totalCount : -1}, ${idx1}, ${idx2})">${idx2 + 1}</td>`;
+                            countSelected++;
+                        }
+
+                    }
+                    // 값이 0일때
+                } else {
+                    if (idx2 === 0) {
+                        seatHtml += `<td class="column">${columnArr[idx1][0]}</td>`
+                    }
+                    if(totalCount === 1) {
+                        if (idx2 % 2 === 1) {
+                            seatHtml += `<td class="row disable-row">X</td>`
+                        } else {
+                            seatHtml += `<td class="row able-row" onclick="seatRenderFn(${totalCount !== -1 ? totalCount : -1}, ${idx1}, ${idx2})">${idx2 + 1}</td>`;
+                        }
+                    } else if (totalCount === -1 || totalCount > 1) {
+                        seatHtml += `<td class="row able-row" onclick="seatRenderFn(${totalCount !== -1 ? totalCount : -1}, ${idx1}, ${idx2})">${idx2 + 1}</td>`;
+
+                    }
+                }
+
+            })
+            seatHtml += `</tr>`
+        })
+
+        totalRender.innerHTML = totalHtml;
+        seatRender.innerHTML = seatHtml
+
+    }
+
+    function plusClick(idx) {
+        infoArr[idx]++;
+        document.getElementById('total-count').value = infoArr[idx];
+        infoHtml = ``;
+        let total = totalTicket(infoArr);
+        seatRenderFn(total);
+        infoRenderFn();
+    }
+
+    function totalTicket(arr) {
+        let total = 0;
+        arr.forEach(item => {
+            total += item;
+        })
+        return total;
+    }
+
+    function totalPrice() {
+        let returns = 0;
+        infoArr.map((item, idx) => {
+            returns += item * priceArr[idx];
+        })
+        return returns;
+    }
+
+    function minusClick(idx) {
+        if (infoArr[idx] > 0) {
+            infoArr[idx]--;
+            document.getElementById('total-count').value = infoArr[idx];
+            infoHtml = ``;
+            let total = totalTicket(infoArr);
+            seatRenderFn(total);
+            infoRenderFn();
+        } else {
+            alert('0보다 작을 수 없습니다.')
+        }
+    }
+
+    function beforeClick() {
+
+    }
+
+    function nextClick() {
+
+    }
+
+    function resetClick() {
+        infoArr = [0, 0, 0];
+        infoHtml = ``;
+        infoRenderFn();
+        seatRenderFn();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+/*table, tbody, tr {*/
+/*    border-collapse: collapse;*/
+/*    border: 1px solid black;*/
+/*}*/
+
+table {
+    width: 70%;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+    border: 2px solid black;
+}
+
+.reserve-wrap {
+    display: flex;
+    /*align-items: center;*/
+    justify-content: center;
+
+}
+
+td .row {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+td .column {
+    border: 0;
+}
+
+.reserve-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+.reserve-movie{
+    /*display:flex;*/
+    width:70%;
+    border-top:2px solid lightgray;
+    /*justify-content: center;*/
+}
+
+.column {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    text-align: left;
+}
+.row {
+    text-align: center;
+    width: 40px;
+    height: 40px;
+}
+
+.info-title {
+    display: flex;
+}
+
+.info {
+    display: flex;
+}
+
+.btn {
+    padding: 4px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #fff;
+    color: #333;
+}
+
+.reserve-seat {
+    width: 30%;
+    background-color: darkgray;
+    color: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+.info-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.row{
+    background-color: gray;
+    color:white;
+    border: 1px solid aqua;
+    width: 20px;
+}
+
+.disable-row {
+    background-color: lightgray;
+    color:white;
+    border: 1px solid aqua;
+    width: 20px;
+}
+
+input {
+    width: 35px;
+    text-align: center;
+}
+
+.seat-table {
+    display: flex;
+    justify-content: center;
+}
+
+.screen {
+    text-align: center;
+}
+
+.selected-seat {
+    background-color: blue;
+}
+
+.selected-seat-right {
+    border: 1px solid white;
+}
+
+.selected{
+    display: flex;
+    justify-content: space-between;
+}
+.seat-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.selected-wrap-seat {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.selected-list-wrap {
+    display: flex;
+    /*flex-direction: column;*/
+}
+
+.selected-seat-right {
+    width: 40px;
+    text-align: center;
+    padding: 5px;
+}
