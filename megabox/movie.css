@@ -127,6 +127,9 @@ input {
 }
 
 .selected-seat-right {
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*flex-direction: column;*/
     border: 1px solid white;
 }
 
@@ -141,13 +144,16 @@ input {
 
 .selected-wrap-seat {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
 }
 
 .selected-list-wrap {
     display: flex;
-    /*flex-direction: column;*/
+    /*flex-direction: row;*/
+    /*flex-wrap: wrap;*/
+    /*flex-basis: 20px;*/
+    /*flex-grow: max(2);*/
 }
 
 .selected-seat-right {
