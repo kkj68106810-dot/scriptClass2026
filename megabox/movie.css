@@ -14,6 +14,7 @@ table {
 }
 
 .container {
+    padding-left: 10px;
     width: 1000px;
     margin: 0 auto;
     border: 2px solid black;
@@ -62,10 +63,6 @@ td .column {
     height: 40px;
 }
 
-.info-title {
-    display: flex;
-}
-
 .info {
     display: flex;
 }
@@ -87,6 +84,7 @@ td .column {
     padding: 20px;
     margin: 20px;
     border-radius: 20px;
+
 }
 
 .info-wrap {
@@ -109,8 +107,16 @@ td .column {
 }
 
 input {
-    width: 35px;
+    width: 30px;
     text-align: center;
+}
+
+.minus .btn {
+    background-color: dodgerblue;
+}
+
+.plus .btn {
+    background-color: dodgerblue;
 }
 
 .seat-table {
@@ -127,19 +133,64 @@ input {
 }
 
 .selected-seat-right {
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*flex-direction: column;*/
     border: 1px solid white;
 }
 
 .selected{
-    display: flex;
-    justify-content: space-between;
+    border: 1px solid black;
 }
 .seat-list {
     display: flex;
-    flex-direction: column;
+    height: 50%;
+    width: 100%;
+}
+
+.reserve-info-right{
+    display: flex;
+
+}
+.selected-wrap-info {
+    padding: 10px;
+}
+
+.selected-wrap {
+    padding : 2px;
+}
+
+.hover:hover {
+    background-color: cornflowerblue;
+}
+
+.selected-wrap {
+    display: flex;
+}
+
+.selected3 {
+    background-color: lightgray;
+    color: white;
+    text-align: center;
+    width:15px;
+    height:15px;
+}
+.selected4 {
+    background-color: lightgray;
+    width:15px;
+    height:15px;
+}
+.selected5 {
+    background-color: darkslategray;
+    width:15px;
+    height:15px;
+}
+.selected6 {
+    background-color: darkgreen;
+    width:15px;
+    height:15px;
+}
+.selected2 {
+    background-color: cornflowerblue;
+    width:15px;
+    height:15px;
 }
 
 .selected-wrap-seat {
@@ -148,16 +199,19 @@ input {
     flex-wrap: wrap;
 }
 
-.selected-list-wrap {
-    display: flex;
-    /*flex-direction: row;*/
-    /*flex-wrap: wrap;*/
-    /*flex-basis: 20px;*/
-    /*flex-grow: max(2);*/
+.reserve-info-right, #selected-list {
+    border: 1px solid black;
+    width: 50%;
+    height: 70%;
+    font-size:13px;
 }
 
 .selected-seat-right {
-    width: 40px;
+    width: 50px;
     text-align: center;
     padding: 5px;
+}
+.price-div{
+    display: flex;
+    justify-content: space-between;
 }
