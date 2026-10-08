@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TodoList 연습문제</title>
+    <style>
+        .todo-container {
+            width :500px;
+            margin: 20px auto;
+        }
+        .todo-wrap {
+            display: flex;
+            justify-content: space-evenly;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <h1>할 일 목록</h1>
+        <input id="task" type="text" placeholder="할 일 입력" />
+        <button onclick="addTask()">추가</button>
+        <div id="input-area">
+        </div>
+        <ul id="tasks"></ul>
+    </div>
+
+
+
+    <script>
+        let todoJob = document.getElementById('task');
+        let inputJobEle = document.getElementById('tasks');
+
+
+        function addTask() {
+            let createLi = document.createElement('li');
+
+            if(todoJob.value === '' || todoJob.value === null) {
+                alert("값이 없습니다.")
+            } else {
+                createLi.innerText = todoJob.value;
+                let btn = document.createElement('button');
+                btn.innerText = 'X';
+                createLi.appendChild(btn);
+                inputJobEle.appendChild(createLi);
+                btn.onclick = function() {
+                    createLi.remove();
+                }
+            }
+        }
+
+
+
+    </script>
+
+</body>
+</html>

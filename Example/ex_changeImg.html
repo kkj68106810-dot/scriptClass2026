@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>에디오피아 게뎁</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+            color: #333;
+            padding: 30px 40px;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .wrap {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        /* 이미지 영역 */
+        .image-container {
+            width: 360px;
+            flex-shrink: 0;
+        }
+
+        .main-image-container {
+            width: 360px;
+            height: 360px;
+            border: 1px dashed #999;
+            overflow: hidden;
+        }
+
+        .main-wrapper,
+        .main-image-tag {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .sub-image-container {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .sub-image {
+            width: calc((100% - 16px) / 3);
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .sub-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 상품 정보 영역 */
+        .product-container {
+            padding-top: 10px;
+        }
+
+        .product-info .product-p {
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        .product-info .price {
+            color: #7b2cbf;
+            font-weight: bold;
+        }
+
+        .product-info .ship-note {
+            font-size: 13px;
+            color: #666;
+            margin-left: 4em;
+        }
+
+        .cart-btn {
+            display: block;
+            width: 220px;
+            margin-top: 24px;
+            padding: 12px 0;
+            background: #e8e8e8;
+            border: 1px solid #ccc;
+            text-align: center;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .desc {
+            margin-top: 14px;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            text-decoration: underline;
+            width: fit-content;
+        }
+
+        .desc:hover {
+            color: #7b2cbf;
+        }
+
+        /* 모달 */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            width: 480px;
+            max-height: 80vh;
+            overflow-y: auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 32px 36px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .modal-list {
+            list-style: disc;
+            padding-left: 22px;
+            margin-bottom: 22px;
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        .modal-section-title {
+            color: #3a7bd5;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .modal-section-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            visibility: hidden;
+            z-index: 9;
+        }
+
+        .overlay.active {
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <h2>에디오피아 게뎁</h2>
+
+    <div class="wrap">
+        <div class="image-container">
+            <div class="main-image-container">
+                <div class="main-wrapper">
+                    <img src="/images/coffee-pink.jpg" class="main-image-tag" alt="coffee">
+                </div>
+            </div>
+            <div class="sub-image-container">
+                <div class="sub-image"><img src="/images/coffee-pink.jpg" alt="coffee"></div>
+                <div class="sub-image"><img src="/images/coffee-blue.jpg" alt="coffee"></div>
+                <div class="sub-image"><img src="/images/coffee-gray.jpg" alt="coffee"></div>
+            </div>
+        </div>
+
+        <div class="product-container">
+            <div class="product-info">
+                <p class="product-p">상품명: 에디오피아 게뎁</p>
+                <p class="product-p">판매가: <span class="price">9,000원</span></p>
+                <p class="product-p">배송비: 3,000원</p>
+                <p class="product-p ship-note">(50,000원 이상 구매시 무료)</p>
+                <p class="product-p">적립금: 180원(2%)</p>
+                <p class="product-p">로스팅: 2019.06.17</p>
+            </div>
+            <button type="button" class="cart-btn">장바구니 담기</button>
+            <div class="desc" onclick="descriptionOpen()">상세 설명 보기</div>
+        </div>
+    </div>
+
+    <div class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">상품 상세 정보</h3>
+            <ul class="modal-list">
+                <li>원산지: 에디오피아</li>
+                <li>지역: 이르가체프 코체레</li>
+                <li>농장: 게뎁</li>
+                <li>고도: 1,950 ~ 2,000 m</li>
+                <li>품종: 지역 토착종</li>
+                <li>가공법: 워시드</li>
+            </ul>
+            <p class="modal-section-title">Information</p>
+            <p class="modal-section-text">
+                제2차 세계대전 이후 설립된 게뎁 농장은 유기농 인증 농장으로 여성의 고용 창출과 지역사회 발전에 기여하며 3대째 이어져 내려오는 오랜 역사를 가진 농장입니다. 게뎁 농장은 SCAA 인증을 받은 커피 품질관리 실험실을 갖추고 있어 철저한 관리를 통해 스페셜티 커피를 생산합니다.
+            </p>
+            <p class="modal-section-title">Flavor Note</p>
+            <p class="modal-section-text">
+                은은하고 다채로운 꽃향, 망고, 다크 체리, 달달함이 입안 가득.
+            </p>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+    <script>
+        let subImage = document.querySelectorAll('.sub-image img');
+        let mainImage = document.querySelector('.main-image-tag');
+        let modalPop = document.querySelector('.modal');
+        let overlay = document.querySelector('.overlay');
+        let src = '';
+
+        subImage.forEach((img) => {
+            img.addEventListener('mouseover', () => {
+                src = img.getAttribute('src');
+                mainImage.setAttribute('src', src);
+            });
+            img.addEventListener('mouseout', () => {
+                src = subImage[0].getAttribute('src');
+                mainImage.setAttribute('src', src);
+            });
+        });
+
+        overlay.onclick = () => {
+            overlay.classList.remove('active');
+            modalPop.classList.remove('active');
+        };
+
+        function descriptionOpen() {
+            modalPop.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

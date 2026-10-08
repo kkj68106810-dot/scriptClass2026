@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>모달 창 만들기</title>
+    <link rel="stylesheet" href="/style/ex_modal.css"/>
+</head>
+<body>
+    <!-- 모달열기버튼 -->
+    <button class="btn-open">뉴스레터 구독하기</button>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="photo"></div>
+            <div class="desc">
+                <div class="desc-header">
+                    <h2>지금 다양한 혜택을 받아보세요.</h2>
+                    <button class="btn-close">&times;</button>
+                </div>
+                <div class="desc-content">
+                    <input type="email" placeholder="이메일 주소를 입력하시오">
+                    <button>뉴스레터 구독하기</button>
+                    <p>
+                        스타트업메이트뉴스룸의다양한소식과혜택을이메일로받아
+                        보시려면구독신청해주시기바랍니다. 스타트업메이트에대해알고
+                        싶은뉴스, 꼭 알아야할뉴스를신속하고정확하게전합니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    <script>
+        // addEventListener이용
+        // 모달열기
+        let btnOpen = document.querySelector('.btn-open');
+        let btnClose = document.querySelector('.btn-close');
+        let modalPop = document.querySelector('.modal');
+        let overlay = document.querySelector('.overlay');
+
+        btnOpen.addEventListener('click', e => {
+            modalPop.classList.toggle('active');
+            overlay.classList.toggle('active');
+        })
+
+        btnClose.addEventListener('click', e => {
+            modalPop.classList.remove('active');
+            overlay.classList.remove('active');
+        })
+
+        overlay.addEventListener('click', e => {
+            modalPop.classList.remove('active');
+            overlay.classList.remove('active');
+        })
+
+
+        // btnOpen.addEventListener('click', (e) => {
+        //     document.getElementById('modal').style.opacity = 1;
+        // })
+        // 모달 닫기
+
+        // 오버레이클릭시 모달 닫기
+
+    </script>
+</body>
+</html>

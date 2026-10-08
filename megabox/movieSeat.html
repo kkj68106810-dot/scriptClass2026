@@ -348,15 +348,7 @@
 
         if (totalCount <= selectedCount) {
             alert('선택한 좌석수보다 총 인원이 적으므로 초기화 합니다.')
-            seats = Array.from(Array(10), () => new Array(11).fill(0));
-            selectedCount = 0;
-            infoArr = [0, 0, 0];
-            selectedSeatArr = [];
-            selectedHtml = ``
-            infoHtml = ``;
-            seatHtml = ``;
-            seatRenderFn();
-            infoRenderFn();
+            resetClick();
         } else if (infoArr[idx] > 0) {
             infoHtml = ``;
             seatHtml = ``;
@@ -365,11 +357,10 @@
             selectedCount--;
             seatRenderFn();
             infoRenderFn();
+            countSeat2 = countSeat2 - 0.5;
         } else {
             alert('0보다 작을 수 없습니다.')
         }
-
-        countSeat2 = countSeat2 - 0.5;
 
     }
 
@@ -386,14 +377,14 @@
         selectedSeatArr = [];
         seats = Array.from(Array(10), () => new Array(11).fill(0));
         infoHtml = ``;
-        infoRenderFn();
-        seatRenderFn();
-        selectedRenderFn();
         infoArr = [0, 0, 0];
         selectedSeatArr = [];
         selectedCount = 0;
         seatCount2 = 0;
         countSeat2 = 0;
+        infoRenderFn();
+        seatRenderFn();
+        selectedRenderFn();
     }
 </script>
 </body>
