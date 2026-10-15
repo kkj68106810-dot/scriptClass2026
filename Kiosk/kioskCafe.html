@@ -12,6 +12,8 @@
                 <div class="title">원하시는 음료를 선택해 주세요</div>
                 <div class="subtitle">Please choose the drink you want.</div>
                 <div class="menu">MENU</div>
+                <button class="btn" onclick="changeMenu('HOT')">HOT</button>
+                <button class="btn" onclick="changeMenu('ICE')">ICE</button>
             </div>
             <div  class="middle-container">
                 <ul id="menu-list" class="menu-list">
@@ -46,9 +48,14 @@
             { id: 11, name: '딥카페라테', type: 'ICE', price: 3700,quantity:1, images : "./images/12.png" },
         ]
         let cartList = [];
+        let typeList = [];
         let ulListHtml = `<div class="item-container">`;
-        menus.forEach(item => {
-            ulListHtml += `
+
+        ulListHtmlRender();
+
+        function ulListHtmlRender () {
+            menus.forEach(item => {
+                ulListHtml += `
                 <li class="menu-item" onclick="addCart(${item.id})">
                     <div class="menu-image"><img src="${item.images}" alt="${item.name}"></div>
                     <div class="menu-type">${item.type}</div>
@@ -56,9 +63,15 @@
                     <div class="menu-price">${item.price.toLocaleString()}</div>
                 </li>
             `;
-        });
-        ulListHtml += `</div>`;
-        document.getElementById("menu-list").innerHTML = ulListHtml;
+            });
+            ulListHtml += `</div>`;
+            document.getElementById("menu-list").innerHTML = ulListHtml;
+        }
+
+        function changeMenu(type) {
+
+        }
+
 
         function addCart(idx) {
             let isPush = true;
