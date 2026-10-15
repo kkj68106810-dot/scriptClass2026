@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>setTimeOut() 메서드</title>
+</head>
+<body>
+    <div id="clock"></div>
+    <script>
+        //
+        setTimeout(() => console.log('2초 후 실행'), 2000);
+
+        let timer = setTimeout(() => {
+            console.log('3초 후 한번만 실행')
+        }, 3000)
+
+        // 2초후 타이머 취소할때 사용
+        setTimeout(() => {
+            clearTimeout(timer)
+            console.log('타이머취소')
+        }, 5000)
+
+        // 디지털 시계
+        function setClock() {
+            let now = new Date();
+            let s = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+            document.getElementById('clock').innerHTML = s;
+            setTimeout('setClock()', 1000);
+        }
+        setClock()
+    </script>
+</body>
+</html>

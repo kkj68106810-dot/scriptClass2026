@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>slider</title>
+
+    <style>
+        body{
+            background-color: #f1f3f5;
+        }
+        .slider-wrap {
+            position: relative;
+            width: 650px;
+            height: 350px;
+            margin: 100px auto;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        .slider-wrap img {
+            width: 100%;
+            height: 100%;
+        }
+        .slider-wrap .btns{
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            border: 1px solid red;
+            gap: 10px;
+        }
+        .slider-wrap .btns span{
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+        }
+        .slider-wrap .btns span.active{
+            background-color: dodgerblue;
+            transform:scale(1.3);
+        }
+        .slider-wrap .control {
+            position: absolute;
+            top:10px;
+            right:10px;
+            /*background-color: rgba(0,0,0,0.5);*/
+            background-color: lightgray;
+            padding: 6px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            /*  user-select:none => 웹페이지 글자나 텍스트를 마우스로 드래그
+                하여 선택하지 못하도록 방지하는 기능
+            */
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-wrap">
+    <div class="slider">
+        <img id="photo" src="/images/pic_1.jpg" alt="슬라이드 이미지" />
+    </div>
+    <div class="btns">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="control" id="togglebtn">&#x23F8; 정지</div>
+    </div>
+    <script>
+        let photo = document.getElementById('photo');
+        let btns = document.querySelectorAll('.btns span');
+        let toggleBtn = document.getElementById('togglebtn');
+        console.log(btns)
+        // 현재 보여주는 슬라이드 번호초기화
+        let currentIndex = 0;
+        // span의 개수 초기화
+        let spanTotal = btns.length;
+        // 현재 슬라이드가 재생중인지, 정지상태인지 상태를 확인하는 변수
+        let isPlay = true;
+        let timer;
+        console.log(spanTotal)
+        function showSlide(index) {
+            photo.src = `/images/pic_${index+1}.jpg`;
+
+            for (let i = 0; i < spanTotal; i++) {
+                btns[i].classList.remove('active');
+            }
+            //
+            btns[index].classList.add('active');
+        }
+        startSlide();
+        function startSlide() {
+            timer = setInterval(() => {
+                // currentIndex = (currentIndex + 1)% spanTotal;
+                if(currentIndex === spanTotal - 1) {
+                    currentIndex = 0;
+                } else {
+                    currentIndex++;
+                }
+                // 슬라이드 쇼함수
+                showSlide(currentIndex);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
